@@ -6,5 +6,5 @@ export default defineConfig({
   server: {
     port: 3000, // Development server port
   },
-  base: '/website2025/',
+  base: '/',
 });
