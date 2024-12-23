@@ -6,11 +6,17 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  base: '/website2025/',
+  base: '/',
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: true,
-    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name].[hash][extname]',
+        chunkFileNames: 'assets/[name].[hash].js',
+        entryFileNames: 'assets/[name].[hash].js',
+      },
+    },
   },
 });
