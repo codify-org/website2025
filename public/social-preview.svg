@@ -1,47 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background gradient -->
+  <!-- Background with darker gradient for better social preview -->
   <rect width="1200" height="630" fill="url(#gradient)"/>
   
-  <!-- Noise texture -->
-  <rect width="1200" height="630" fill="url(#noise)" fill-opacity="0.1"/>
+  <!-- Subtle grid pattern -->
+  <path d="M0 0h1200v630H0z" fill="url(#grid)" fill-opacity="0.03"/>
   
-  <!-- Content -->
+  <!-- Content container -->
   <g>
-    <!-- Logo/Icon -->
-    <circle cx="600" cy="240" r="80" fill="url(#iconGradient)" />
-    <path d="M560 240 L600 200 L640 240 L600 280 Z" fill="white"/>
+    <!-- Logo/Icon with larger size -->
+    <circle cx="600" cy="230" r="100" fill="url(#iconGradient)" filter="url(#glow)"/>
+    <path d="M540 230 L600 170 L660 230 L600 290 Z" fill="white"/>
     
-    <!-- Title -->
-    <text x="600" y="400" text-anchor="middle" fill="white" style="font-size: 64px; font-weight: bold; font-family: system-ui, -apple-system, sans-serif;">
+    <!-- Title with increased size -->
+    <text x="600" y="400" text-anchor="middle" fill="white" style="font-size: 72px; font-weight: bold; font-family: system-ui, -apple-system, sans-serif;">
       Codify Capital
     </text>
     
-    <!-- Subtitle -->
-    <text x="600" y="460" text-anchor="middle" fill="#E9D5FF" style="font-size: 32px; font-family: system-ui, -apple-system, sans-serif;">
-      Pro-Grade Options Backtesting Platform
+    <!-- Subtitle with better contrast -->
+    <text x="600" y="470" text-anchor="middle" fill="#E9D5FF" style="font-size: 36px; font-family: system-ui, -apple-system, sans-serif;">
+      Pro-Grade Options Backtesting
     </text>
   </g>
   
   <!-- Definitions -->
   <defs>
-    <!-- Background gradient -->
+    <!-- Enhanced background gradient -->
     <linearGradient id="gradient" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" style="stop-color:#000000"/>
-      <stop offset="50%" style="stop-color:#581C87"/>
-      <stop offset="100%" style="stop-color:#312E81"/>
+      <stop offset="0%" style="stop-color:#0F0F1A"/>
+      <stop offset="50%" style="stop-color:#1F1045"/>
+      <stop offset="100%" style="stop-color:#1A1A35"/>
     </linearGradient>
     
-    <!-- Icon gradient -->
-    <linearGradient id="iconGradient" x1="520" y1="160" x2="680" y2="320">
+    <!-- Glowing effect for the icon -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 1   0 0 0 0 0.5   0 0 0 0 1  0 0 0 0.5 0"/>
+      <feBlend in="SourceGraphic" in2="glow" mode="normal"/>
+    </filter>
+    
+    <!-- Icon gradient with more vibrant colors -->
+    <linearGradient id="iconGradient" x1="500" y1="130" x2="700" y2="330">
       <stop offset="0%" style="stop-color:#A855F7"/>
       <stop offset="100%" style="stop-color:#EC4899"/>
     </linearGradient>
     
-    <!-- Noise pattern -->
-    <filter id="noise">
-      <feTurbulence type="fractalNoise" baseFrequency="0.75" />
-      <feColorMatrix type="saturate" values="0"/>
-    </filter>
+    <!-- Subtle grid pattern -->
+    <pattern id="grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M20 0L0 0 0 20" fill="none" stroke="white" stroke-width="0.5" opacity="0.1"/>
+    </pattern>
   </defs>
 </svg> 
