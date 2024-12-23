@@ -4,7 +4,13 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3000, // Development server port
+    port: 3000,
   },
-  base: '/website2025/', // Temporary: revert to GitHub Pages path until DNS propagation
+  base: '/website2025/',
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: true,
+    cssCodeSplit: true,
+  },
 });
