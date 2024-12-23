@@ -6,5 +6,5 @@ export default defineConfig({
   server: {
     port: 3000, // Development server port
   },
-  base: '/',
+  base: '/website2025/', // Temporary: revert to GitHub Pages path until DNS propagation
 });
