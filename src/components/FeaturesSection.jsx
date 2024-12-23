@@ -1,5 +1,10 @@
 import React from 'react';
-import { FaChartLine, FaClock, FaDatabase, FaRobot, FaChartBar, FaShieldAlt } from 'react-icons/fa';
+import BacktestingIcon from '../assets/icons/backtesting.svg';
+import CalendarIcon from '../assets/icons/calendar.svg';
+import MarketDataIcon from '../assets/icons/market-data.svg';
+import ScannerIcon from '../assets/icons/scanner.svg';
+import AnalyticsIcon from '../assets/icons/analytics.svg';
+import PositionIcon from '../assets/icons/position.svg';
 
 const FeatureCard = ({ icon: Icon, title, description }) => (
   <div className="relative group">
@@ -9,7 +14,7 @@ const FeatureCard = ({ icon: Icon, title, description }) => (
     <div className="relative flex flex-col h-full p-8 bg-black bg-opacity-90 backdrop-blur-xl rounded-xl border border-purple-900/50 transform hover:-translate-y-1 transition duration-300">
       <div className="flex items-center mb-4">
         <div className="p-3 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg">
-          <Icon className="w-8 h-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400" />
+          <img src={Icon} alt={title} className="w-8 h-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400" />
         </div>
         <h3 className="ml-4 text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-purple-200 to-pink-200">
           {title}
@@ -43,32 +48,32 @@ const FeaturesSection = () => (
       {/* Features grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <FeatureCard
-          icon={FaChartLine}
+          icon={BacktestingIcon}
           title="Advanced Backtesting"
           description="Test your strategies against real market conditions with millisecond-accurate historical data and true bid-ask spreads."
         />
         <FeatureCard
-          icon={FaClock}
+          icon={CalendarIcon}
           title="Earnings Calendar"
           description="Never miss a trade with our comprehensive earnings calendar, complete with volatility forecasts and historical moves."
         />
         <FeatureCard
-          icon={FaDatabase}
+          icon={MarketDataIcon}
           title="Premium Market Data"
           description="Access institutional-grade options data including real-time Greeks, implied volatility surfaces, and order flow."
         />
         <FeatureCard
-          icon={FaRobot}
+          icon={ScannerIcon}
           title="Strategy Scanner"
           description="Discover high-probability setups with our AI-powered scanner that analyzes market conditions and historical patterns."
         />
         <FeatureCard
-          icon={FaChartBar}
+          icon={AnalyticsIcon}
           title="Risk Analytics"
           description="Visualize your risk with professional-grade analytics including Greeks exposure, IV percentile, and profit probability."
         />
         <FeatureCard
-          icon={FaShieldAlt}
+          icon={PositionIcon}
           title="Position Sizing"
           description="Optimize your position sizes with our advanced risk management tools based on your account size and risk tolerance."
         />
