@@ -14,7 +14,12 @@ const FeatureCard = ({ icon: Icon, title, description }) => (
     <div className="relative flex flex-col h-full p-8 bg-black bg-opacity-90 backdrop-blur-xl rounded-xl border border-purple-900/50 transform hover:-translate-y-1 transition duration-300">
       <div className="flex items-center mb-4">
         <div className="p-3 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-lg">
-          <img src={Icon} alt={title} className="w-8 h-8 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400" />
+          <img 
+            src={Icon} 
+            alt={title} 
+            className="w-8 h-8 [filter:brightness(5)_saturate(0)] opacity-100 group-hover:opacity-90 transition-opacity"
+            style={{ filter: 'invert(1)' }}
+          />
         </div>
         <h3 className="ml-4 text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-purple-200 to-pink-200">
           {title}
