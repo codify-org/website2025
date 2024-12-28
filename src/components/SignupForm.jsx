@@ -20,6 +20,9 @@ const SignupForm = ({ onSubmit }) => {
         ? 'http://localhost:3000/api/send-email'
         : 'https://vercel.codify.com.co/api/send-email';
 
+      console.log('Sending request to:', apiUrl);
+      console.log('Request data:', formData);
+
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -28,19 +31,21 @@ const SignupForm = ({ onSubmit }) => {
         body: JSON.stringify(formData)
       });
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        let errorMessage;
-        try {
-          const errorData = JSON.parse(errorText);
-          errorMessage = errorData.error;
-        } catch (e) {
-          errorMessage = errorText;
-        }
-        throw new Error(errorMessage || 'Failed to send email');
+      const responseText = await response.text();
+      console.log('Raw response:', responseText);
+
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch (e) {
+        console.error('Failed to parse response:', e);
+        throw new Error('Invalid server response');
       }
 
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.details || data.error || 'A server error has occurred');
+      }
+
       setIsLoading(false);
       setSuccess(true);
       onSubmit(formData);

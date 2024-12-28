@@ -22,7 +22,19 @@ module.exports = async function handler(req, res) {
   }
 
   try {
+    console.log('Received request body:', req.body);
+    
     const { email, tradingExperience, interests } = req.body;
+    
+    if (!email || !tradingExperience || !interests) {
+      console.error('Missing required fields:', { email, tradingExperience, interests });
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    console.log('Creating email transporter with credentials:', {
+      user: process.env.EMAIL_USER ? 'Set' : 'Not set',
+      pass: process.env.EMAIL_PASS ? 'Set' : 'Not set'
+    });
 
     // Create transporter
     const transporter = nodemailer.createTransport({
@@ -53,12 +65,25 @@ module.exports = async function handler(req, res) {
       `
     };
 
+    console.log('Attempting to send email with options:', { ...mailOptions, to: '***' });
+
     // Send email
     await transporter.sendMail(mailOptions);
+    console.log('Email sent successfully');
 
     res.status(200).json({ message: 'Email sent successfully' });
   } catch (error) {
-    console.error('Error sending email:', error);
-    res.status(500).json({ error: 'Failed to send email' });
+    console.error('Detailed error:', {
+      message: error.message,
+      stack: error.stack,
+      code: error.code,
+      response: error.response
+    });
+    
+    res.status(500).json({ 
+      error: 'Failed to send email',
+      details: error.message,
+      code: error.code
+    });
   }
 } 
