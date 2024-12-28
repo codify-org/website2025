@@ -14,17 +14,17 @@ const HeroSection = () => (
         <div className="inline-block">
           <span className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium bg-purple-100 bg-opacity-10 text-purple-200 backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-purple-400 mr-2 animate-pulse"></span>
-            Real-Time Market Data
+            AI-Powered Market Data
           </span>
         </div>
 
         {/* Main heading with gradient text */}
         <h1 className="text-6xl md:text-7xl font-extrabold tracking-tight">
           <span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-pink-200 to-white">
-            Pro-Grade Options
+            Codify AI Backtesting
           </span>
           <span className="block text-3xl md:text-4xl mt-3 text-purple-200 font-light">
-            Backtesting That Actually Works
+            Pro-Grade Options Analysis
           </span>
         </h1>
 
@@ -32,7 +32,7 @@ const HeroSection = () => (
         <p className="max-w-2xl mx-auto text-xl text-purple-100 leading-relaxed">
           Stop gambling on earnings plays. Get institutional-grade backtesting with 
           <span className="font-semibold text-pink-300"> real bid-ask spread data</span> and 
-          <span className="font-semibold text-purple-300"> microsecond precision</span>. 
+          <span className="font-semibold text-purple-300"> AI-powered analysis</span>. 
           Built by traders, for traders.
         </p>
 

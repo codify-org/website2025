@@ -42,11 +42,11 @@ const FeaturesSection = () => (
       <div className="text-center mb-20">
         <h2 className="text-4xl font-bold mb-4">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-pink-200 to-purple-200">
-            Professional Trading Tools
+            AI-Powered Trading Tools
           </span>
         </h2>
         <p className="max-w-2xl mx-auto text-lg text-purple-100/80">
-          Everything you need to analyze, backtest, and perfect your earnings options strategies
+          Everything you need to analyze, backtest, and perfect your options strategies with AI-driven insights
         </p>
       </div>
 
@@ -54,33 +54,33 @@ const FeaturesSection = () => (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <FeatureCard
           icon={BacktestingIcon}
-          title="Advanced Backtesting"
-          description="Test your strategies against real market conditions with millisecond-accurate historical data and true bid-ask spreads."
+          title="AI Backtesting"
+          description="Test your strategies with AI-powered analysis, using real market conditions, millisecond-accurate historical data, and true bid-ask spreads."
         />
         <FeatureCard
           icon={CalendarIcon}
-          title="Earnings Calendar"
-          description="Never miss a trade with our comprehensive earnings calendar, complete with volatility forecasts and historical moves."
+          title="Smart Calendar"
+          description="AI-enhanced earnings calendar with volatility forecasts, historical moves analysis, and predictive insights for better timing."
         />
         <FeatureCard
           icon={MarketDataIcon}
-          title="Premium Market Data"
-          description="Access institutional-grade options data including real-time Greeks, implied volatility surfaces, and order flow."
+          title="Premium Data"
+          description="Access institutional-grade options data enhanced by AI, including real-time Greeks, implied volatility surfaces, and order flow analysis."
         />
         <FeatureCard
           icon={ScannerIcon}
-          title="Strategy Scanner"
-          description="Discover high-probability setups with our AI-powered scanner that analyzes market conditions and historical patterns."
+          title="AI Strategy Scanner"
+          description="Discover high-probability setups with our advanced AI scanner that analyzes market conditions and historical patterns."
         />
         <FeatureCard
           icon={AnalyticsIcon}
           title="Risk Analytics"
-          description="Visualize your risk with professional-grade analytics including Greeks exposure, IV percentile, and profit probability."
+          description="AI-driven risk analysis with professional-grade metrics including Greeks exposure, IV percentile, and profit probability calculations."
         />
         <FeatureCard
           icon={PositionIcon}
-          title="Position Sizing"
-          description="Optimize your position sizes with our advanced risk management tools based on your account size and risk tolerance."
+          title="Smart Sizing"
+          description="Optimize your position sizes with AI-powered risk management tools based on your account size and risk tolerance."
         />
       </div>
 
