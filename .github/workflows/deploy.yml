@@ -24,14 +24,10 @@ jobs:
           cache: 'npm'
 
       - name: Install Dependencies
-        run: |
-          cd my-app
-          npm install
+        run: npm install
 
       - name: Build
-        run: |
-          cd my-app
-          npm run build
+        run: npm run build
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_PASS: ${{ secrets.EMAIL_PASS }}
@@ -40,4 +36,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: my-app/dist
+          folder: dist
