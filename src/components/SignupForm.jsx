@@ -16,22 +16,21 @@ const SignupForm = ({ onSubmit }) => {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:3001/api/signup', {
+      const apiUrl = window.location.hostname === 'localhost' 
+        ? 'http://localhost:3001/send-email'
+        : 'https://codify.com.co/send-email';
+
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email: formData.email,
-          tradingExperience: formData.tradingExperience,
-          interests: formData.interests
-        })
+        body: JSON.stringify(formData)
       });
 
       const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.error || 'Network error. Please try again later.');
+        throw new Error(data.error || 'Failed to send email');
       }
 
       setIsLoading(false);
@@ -39,7 +38,7 @@ const SignupForm = ({ onSubmit }) => {
       onSubmit(formData);
     } catch (error) {
       console.error('Signup error:', error);
-      setError(error.message || 'Network error. Please try again later.');
+      setError(error.message || 'Failed to send email. Please try again later.');
       setIsLoading(false);
     }
   };
