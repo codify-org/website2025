@@ -15,14 +15,14 @@ const SignupForm = ({ onSubmit }) => {
     setIsLoading(true);
     setError(null);
 
+    const apiUrl = window.location.hostname === 'localhost' 
+      ? 'http://localhost:3000/api/send-email'
+      : 'https://vercel.codify.com.co/api/send-email';
+
+    console.log('Sending request to:', apiUrl);
+    console.log('Request data:', formData);
+
     try {
-      const apiUrl = window.location.hostname === 'localhost' 
-        ? 'http://localhost:3000/api/send-email'
-        : 'https://vercel.codify.com.co/api/send-email';
-
-      console.log('Sending request to:', apiUrl);
-      console.log('Request data:', formData);
-
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -31,27 +31,19 @@ const SignupForm = ({ onSubmit }) => {
         body: JSON.stringify(formData)
       });
 
-      const responseText = await response.text();
-      console.log('Raw response:', responseText);
-
-      let data;
-      try {
-        data = JSON.parse(responseText);
-      } catch (e) {
-        console.error('Failed to parse response:', e);
-        throw new Error('Invalid server response');
-      }
+      const data = await response.json();
+      console.log('Response:', data);
 
       if (!response.ok) {
-        throw new Error(data.details || data.error || 'A server error has occurred');
+        throw new Error(data.message || 'Failed to send email');
       }
 
       setIsLoading(false);
       setSuccess(true);
       onSubmit(formData);
     } catch (error) {
-      console.error('Signup error:', error);
-      setError(error.message || 'Failed to send email. Please try again later.');
+      console.error('Error:', error);
+      setError(error.message);
       setIsLoading(false);
     }
   };
