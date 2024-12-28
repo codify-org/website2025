@@ -1,4 +1,6 @@
-const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 module.exports = async (req, res) => {
   // Set CORS headers
@@ -24,18 +26,8 @@ module.exports = async (req, res) => {
   try {
     const { email, tradingExperience, interests } = req.body;
 
-    // Create transporter
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
-      }
-    });
-
-    // Email content
-    const mailOptions = {
-      from: '"David Martin Riveros" <david@codify.capital>',
+    const { data, error } = await resend.emails.send({
+      from: 'Codify Capital <onboarding@resend.dev>',
       to: email,
       subject: 'Welcome to Codify Capital!',
       html: `
@@ -51,10 +43,12 @@ module.exports = async (req, res) => {
         <p>Best regards,</p>
         <p>David Martin Riveros<br>Codify Capital</p>
       `
-    };
+    });
 
-    // Send email
-    await transporter.sendMail(mailOptions);
+    if (error) {
+      throw error;
+    }
+
     res.status(200).json({ message: 'Email sent successfully' });
   } catch (error) {
     console.error('Error sending email:', error);
