@@ -17,8 +17,8 @@ const SignupForm = ({ onSubmit }) => {
 
     try {
       const apiUrl = window.location.hostname === 'localhost' 
-        ? 'http://localhost:3001/send-email'
-        : 'https://codify.com.co/send-email';
+        ? 'http://localhost:3000/api/send-email'
+        : '/api/send-email';
 
       const response = await fetch(apiUrl, {
         method: 'POST',
