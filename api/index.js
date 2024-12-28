@@ -1,27 +1,27 @@
-const nodemailer = require('nodemailer');
+import nodemailer from 'nodemailer';
 
-module.exports = async function handler(req, res) {
-  // Set CORS headers
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  res.setHeader('Access-Control-Allow-Origin', 'https://vercel.codify.com.co');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
-
-  // Handle preflight request
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
-
-  // Only allow POST requests
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
+export default async function handler(req, res) {
   try {
+    // Set CORS headers
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Origin', 'https://vercel.codify.com.co');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
+    res.setHeader(
+      'Access-Control-Allow-Headers',
+      'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    );
+
+    // Handle preflight request
+    if (req.method === 'OPTIONS') {
+      res.status(200).end();
+      return;
+    }
+
+    // Only allow POST requests
+    if (req.method !== 'POST') {
+      return res.status(405).json({ error: 'Method not allowed' });
+    }
+
     console.log('Received request body:', req.body);
     
     const { email, tradingExperience, interests } = req.body;
@@ -31,6 +31,11 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.error('Missing email credentials');
+      return res.status(500).json({ error: 'Server configuration error' });
+    }
+
     console.log('Creating email transporter with credentials:', {
       user: process.env.EMAIL_USER ? 'Set' : 'Not set',
       pass: process.env.EMAIL_PASS ? 'Set' : 'Not set'
@@ -38,7 +43,9 @@ module.exports = async function handler(req, res) {
 
     // Create transporter
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS
@@ -71,7 +78,7 @@ module.exports = async function handler(req, res) {
     await transporter.sendMail(mailOptions);
     console.log('Email sent successfully');
 
-    res.status(200).json({ message: 'Email sent successfully' });
+    return res.status(200).json({ message: 'Email sent successfully' });
   } catch (error) {
     console.error('Detailed error:', {
       message: error.message,
@@ -80,7 +87,7 @@ module.exports = async function handler(req, res) {
       response: error.response
     });
     
-    res.status(500).json({ 
+    return res.status(500).json({ 
       error: 'Failed to send email',
       details: error.message,
       code: error.code
