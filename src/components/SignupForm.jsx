@@ -28,11 +28,19 @@ const SignupForm = ({ onSubmit }) => {
         body: JSON.stringify(formData)
       });
 
-      const data = await response.json();
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to send email');
+        const errorText = await response.text();
+        let errorMessage;
+        try {
+          const errorData = JSON.parse(errorText);
+          errorMessage = errorData.error;
+        } catch (e) {
+          errorMessage = errorText;
+        }
+        throw new Error(errorMessage || 'Failed to send email');
       }
 
+      const data = await response.json();
       setIsLoading(false);
       setSuccess(true);
       onSubmit(formData);
