@@ -18,7 +18,7 @@ const SignupForm = ({ onSubmit }) => {
     try {
       const apiUrl = window.location.hostname === 'localhost' 
         ? 'http://localhost:3000/api/send-email'
-        : '/api/send-email';
+        : 'https://website2025.vercel.app/api/send-email';
 
       const response = await fetch(apiUrl, {
         method: 'POST',
