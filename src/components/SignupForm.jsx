@@ -13,7 +13,6 @@ const SignupForm = ({ onSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setError(null);
 
     const apiUrl = window.location.hostname === 'localhost' 
       ? 'http://localhost:3000/api/send-email'
@@ -22,30 +21,25 @@ const SignupForm = ({ onSubmit }) => {
     console.log('Sending request to:', apiUrl);
     console.log('Request data:', formData);
 
-    try {
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    });
 
-      const data = await response.json();
-      console.log('Response:', data);
+    const data = await response.json();
+    console.log('Response:', data);
 
-      if (!response.ok) {
-        throw new Error(data.message || 'Failed to send email');
-      }
-
-      setIsLoading(false);
+    if (response.ok) {
       setSuccess(true);
       onSubmit(formData);
-    } catch (error) {
-      console.error('Error:', error);
-      setError(error.message);
-      setIsLoading(false);
+    } else {
+      setError(data.message || 'Failed to send email');
     }
+
+    setIsLoading(false);
   };
 
   const handleInterestToggle = (interest) => {
